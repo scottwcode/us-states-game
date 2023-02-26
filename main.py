@@ -33,10 +33,12 @@ while len(states_guessed) < NUM_STATES_TO_GUESS:
                               prompt="Enter the name of a state ('exit' to stop):").title()
     # print(answer)
     if answer == "Exit":
-        states_missed = []
-        for state in states_list:
-            if state not in states_guessed:
-                states_missed.append(state)
+        states_missed = [
+            state for state in states_list if state not in states_guessed]
+        # states_missed = []
+        # for state in states_list:
+        #     if state not in states_guessed:
+        #         states_missed.append(state)
         # print(states_missed)
         new_file = pandas.DataFrame(states_missed)
         new_file.to_csv("states_missed.csv")
