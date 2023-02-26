@@ -27,7 +27,7 @@ data = pandas.read_csv("50_states.csv")
 states_list = data.state.to_list()
 states_guessed = []
 
-while len(states_guessed) < NUM_STATES_TO_GUESS:
+while len(states_guessed) <= NUM_STATES_TO_GUESS:
 
     answer = screen.textinput(title=f"{len(states_guessed)}/50 States Correct",
                               prompt="Enter the name of a state ('exit' to stop):").title()
@@ -54,5 +54,8 @@ while len(states_guessed) < NUM_STATES_TO_GUESS:
         # t.write(data_row.state.item())
         states_guessed.append(answer)
 
+if len(states_guessed) == NUM_STATES_TO_GUESS:
+    new_file = pandas.DataFrame(["All Correct!"])
+    new_file.to_csv("states_missed.csv")
 
 screen.exitonclick()
